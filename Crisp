@@ -1,0 +1,4 @@
+
+If (isBadDataValue(First)) Then (First_Clean =  First_Clean ) Else ( First_Clean = First )End If
+First_S = MovingAverage(First_Clean,0,Horizon)
+If (First_S < 112) Then (First_S = 112) Else If (First_S > 369.5)  Then (First_S = 369.5) End If

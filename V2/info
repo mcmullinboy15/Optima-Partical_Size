@@ -1,0 +1,77 @@
+Branch (A) w/ Thickener_Feed_%S
+Branch (B) w/o Thickener_Feed_%S.
+->> Create a data set of standardized values
+->> Train each branch with the previous variations of layers, neurons, and other hyperparameters (we could meet again to check some of those and narrow down to 3 good ones) with standardized values using the inflection point strategy
+->> Train each branch with the previous variations of layers, neurons, and other hyperparameters (we could meet again to check some of those and narrow down to 3 good ones) with regular values using the inflection point strategy
+->> Use the new R2 definition to evaluate all the scenarios to decide each of them to deploy
+->> Deploy
+
+Luiz:
+1 – Optimizer: RMSProp to AdaDelta Or AdaMax
+2 – Standardizing the inputs (only the inputs).
+        (inputs – average)/(standard deviation)
+
+        from sklearn import preprocessing
+        standardized_Inputs = preprocessing.scale(Inputs)
+
+Remember when you are going to simulate/load the model you have to apply the formula above for each input value,
+so it is necessary to manually calculate the average and standard deviation from each input from your training dataset.
+For example in my case Tag1 and Tag2 comes from OPC addresses then to use them in my model I need:
+
+Tag1CSS = (Tag1 - 1.471570916)/0.214216538
+Tag2CSS = (Tag2 - 4.622836625)/0.314945818
+
+Where the numbers are average and standard deviation from training dataset pre-calculated.
+I have a lot better results with this thing. Even better than normalization.
+
+3 – relu
+4 – Overfitting: I have a limit of neurons and layers.
+    If I go further my the conversation starts to get worse,
+    R2 starts to decrease and the month starts to get worse.
+    So it is better to start with few neurons/layers and go increasing.
+
+
+Features: (*) - Branch_A
+\\RoasterPI\M_G2_Field_Thick_Feed_%Pass:Man         Manu_Pass                   0
+\\RoasterPI\M_G2_BM2_Mtr_HP_Cntl_PV:DCS             BM2_HP                      1
+\\RoasterPI\M_G2_BM_Feed_H2O_Add_GPM_PV:DCS         BM2_H2O                     2
+\\RoasterPI\M_G2_Cyc_Feed_Press_Cntl_PV_DCS         Cyc_FeedP                   3
+\\RoasterPI\M_G2_Cyc_Feed_%S:DCS                    Cyc_Feed_%S                 4
+#\\RoasterPI\M_G2_Cyc_Feed_Tph:DCS                                               5
+#\\RoasterPI\M_G2_Cyc_Feed_H2O_Add_GPM_PV:DCS                                    6
+\\RoasterPI\M_G2_Cyc_Feed_Flw_GPM:DCS               Cyc_Feed_FLOW (*)           7
+\\RoasterPI\M_G2_Thick_Feed_%S_PV:DCS               Thickener_Feed_%S (*)       8
+\\RoasterPI\M_G2_SAG_Feed_Tph_PV:DCS                SAG_Feed                    9
+\\RoasterPI\M_G2_Sag2_Rejects_Cntl_PV:DCS           SAG_Rejects                 10
+\\RoasterPI\M_G2_Sag2_Mtr_HP_Cntl_PV:DCS            SAG_HP                      11
+\\RoasterPI\M_G2_SAG_Spd_CO_%:DCS                   SAG_SP                      12
+Nopen                                               Nopen                       13
+
+
+Training Plan
+    see: exeTrain.py
+
+    Train the Model until Loss equals something
+    Train the Model until Loss average goes up
+    ** Train once for 1000 epochs **
+        Then save the lowest [epochs/loss state]
+        Then Retrain until then, and stop
+
+        Or Save the State and train with that or somethin
+
+
+
+
+
+
+Model info on the Wet Mill Computer:
+Branch_A/models/16/Tight_epoch_200_batch_16_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.980731279461226       Andrews_v2_A_16th
+Branch_A/models/64/Tight_epoch_1000_batch_64_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.818680620694224      Andrews_v2_A_17th
+Branch_A/models/128/Tight_epoch_1000_batch_128_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.850095969002886    Andrews_v2_A_18th
+Branch_A/models/128/Tight_epoch_200_batch_128_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.487629195384251     Andrews_v2_A_19th
+Branch_A/models/256/Tight_epoch_200_batch_256_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.591226591758273     Andrews_v2_A_20th
+Branch_A/models/512/Tight_epoch_1000_batch_512_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.854384197369352    Andrews_v2_A_21th
+Branch_B/models/128/Tight_epoch_200_batch_128_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.561275932142516     Andrews_v2_B_22th
+Branch_B/models/256/Tight_epoch_1000_batch_256_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.970991960963595    Andrews_v2_B_23th
+Branch_B/models/256/Tight_epoch_200_batch_256_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.195759651357614     Andrews_v2_B_24th
+Branch_B/models/512/Tight_epoch_200_batch_512_Model_Model2_h1_128_h2_128_h3_128_lr_0.0001_optim_Adam.pth 12.290589338719634     Andrews_v2_B_25th

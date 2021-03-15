@@ -1,0 +1,31 @@
+'Gen Rules'                 'More Specific'                     #  Descriptor  ( What it does )  ex. The Batch size brings down the outliers, the different Hs make it smoother, or more jumpy
+'EPOCHS'  : [],                         [],                                 #
+'BATCHES' : [16,32,64,128,256,512],     [],                                 #    It is indicative of number of patterns shown to the network before the weight matrix is updated. If batch size is less, patterns would be less repeating and hence the weights would be all over the place and convergence would become difficult. If batch size is high learning would become slow as only after many iterations will the batch size change. It is recommend to try out batch sizes in powers of 2
+'MODELS'  : [],                         [],                                 #
+'H1S'     : [],                         [],                                 #    Depends a lot on the size of data used for training.
+'H2S'     : [],                         [],                                 #
+'H3S'     : [],                         [],                                 #
+'LAYERS'  : [],                         [],                                 #    Depends a lot on the size of data used for training.  High number may introduce over-fitting, vanishing and exploding gradient.  Lower number may cause high bias and low potential model.
+'LRS'     : [0.001,0.01,0.1,1],         [0.001, 0.01], [0.1]                #
+'OPTIMS'  : [],                         [Adam],        [SGD]                #
+'LOSS'    : [],   [],                                 #
+
+'DROPOUT' : [0 - 1]       Linear, ReLU, CrossEntropyLoss, Sequential, Conv2d, MaxPool2d, Module, Softmax, BatchNorm2d, Dropout
+
+            'My Rules'                   'Test to find best'
+'EPOCHS'  : [],                          [1600, 3200, 4800, 6400, 8000, 9600, 11200, 12800, 14400, 16000, 17600, 19200, 20800]
+'BATCHES' : [16,32,64,128,256,512]       [16,32,64,128,256,512]
+'MODELS'  : [],                          [Linear, Conv2d, Conv3d, Sequential, 
+'H1S'     : [input*i + i*hiddenOrouput], [For example if you have 3 input neurons, 10 hidden neurons and 2 output neurons you have (3x10 + 10x2) 50]
+'H2S'     : [],                          [   unknown variables that must be estimated by neural network then at least you need 50 training data.   ]
+'H3S'     : [],                          [   It's just an starting point. Increase the number of training data and each epoch check the over fit.  ]
+'LAYERS'  : [],                          [3, 4, 5, 6, 7, 8]
+'LRS'     : [0.0001, 0.001, 0.01]        [0.001, 0.01, 0.1, 1.0]
+'OPTIMS'  : [Adam]                       [optimizer = optim.SGD(model.parameters(), lr=0.01, momentum=0.9), optimizer = optim.Adam([var1, var2], lr=0.0001)]
+'LOSS'    : [MSELoss]                    [L1Loss, MSELoss]
+
+'DROPOUT' : [0 - 1]
+
+(16 * 128)+(128 * 1) = 2176
+(16 * 64) + (64 * 1) = 1088
+(16 * 32) + (32 * 1) = 544

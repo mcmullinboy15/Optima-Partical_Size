@@ -1,0 +1,91 @@
+Do an analysis of the NNs current
+
+Standaralize
+
+Lower Epochs
+
+
+First_S = 112           369.5       70 to #369.5
+
+Second_S = 4766         5162        #4766 to #5162
+
+Third_S = 571.9         664.4       524.516 to 713.266
+
+Fourth_S = 476          557.7       #476 to 614.672
+
+Fifth_S = 299.4         752.8       277.508 to 760
+
+Sixth_S = 8.9           16.2        #8.9 to #16.2
+
+Seventh_S = 50.5        65.3        #50.5 to 70.524 ( is max )
+
+Eighth_S = 866.6        2450.8      #866.6 to #2450.8
+
+Ninth_S = 99.6          600.2       #99.6 to #600.2
+
+Eleventh_S = 245.7      510.7       285 to (N_11 501.63) (S_11 583.479) ( is MAX )
+
+Twelfth_S = 300.3       635.6       425 to 675
+
+Thirteenth_S = 4.6      85.4        2.2 30.3
+
+Fourteenth_S = 1969.9   3550.3      2250 to 4454.67
+
+Fifteenth_S = 70        100         60 :: 76.23 ( is max )
+
+Sixteenth_S = 5         11          6 to 9
+
+Real_Manu_Pass = 42      89          52 ( 64 ) to 84
+
+TODO:
+    - first xxx
+    - Take off Bearing Preassures
+        third and forth
+    - Circulating load xxx
+    - Cycamps xxx
+    - get Thickner Percent Solids G 2 thick %s dcs
+    - Change R2
+    - Epochs based on what we figure out
+        Follow Luiz's stuff
+    - PLOT MASS FLOW vs AMPS
+    - move Compiled file to Train Val and Test
+
+OLD
+[234378 rows x 70 columns]
+First 49437
+Second 2172
+Third 31691
+Fourth 29190
+Fifth 2999
+Sixth 4425
+Seventh 15744
+Eighth 318
+Ninth 104
+Eleventh_S 0
+Twelfth 9182
+Thirteenth 18332
+Fourteenth 33171
+Fifteenth 354
+Sixteenth 13
+Real_Manu_Pass 0
+[32417 rows x 70 columns]
+
+NEW
+[234378 rows x 70 columns]
+First 19548
+Second 2334
+Third 6
+Fourth 0
+Fifth 1873
+Sixth 8600
+Seventh 2560
+Eighth 6646
+Ninth 2389
+Eleventh_S 967
+Twelfth 11875
+Thirteenth 130
+Fourteenth 2003
+Fifteenth 1779
+Sixteenth 58
+Real_Manu_Pass 4148
+[164523 rows x 70 columns]
